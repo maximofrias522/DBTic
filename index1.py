@@ -30,6 +30,11 @@ def fetch_rss_data():
         titulos1 = post1.title
         fechas1 = post1.updated
 
+        c.execute("SELECT * FROM Ambito_Financiero WHERE Titulo = ?", (titulos1,))
+        existing_entry = c.fetchone()
+        if existing_entry:
+            continue  
+
         sentencia_sql1 = "INSERT INTO Ambito_Financiero (ID, Fecha, Titulo) VALUES (?, ?, ?)"
         valores1 = (unique_id, fechas1, titulos1)
         c.execute(sentencia_sql1, valores1)
@@ -38,6 +43,11 @@ def fetch_rss_data():
         unique_id = generate_unique_id()
         titulos2 = post2.title
         fechas2 = post2.updated
+
+        c.execute("SELECT * FROM Ole WHERE Titulo = ?", (titulos2,))
+        existing_entry = c.fetchone()
+        if existing_entry:
+            continue  
 
         sentencia_sql2 = "INSERT INTO Ole (ID, Fecha, Titulo) VALUES (?, ?, ?)"
         valores2 = (unique_id, fechas2, titulos2)
@@ -48,6 +58,11 @@ def fetch_rss_data():
         titulos3 = post3.title
         fechas3 = post3.updated
 
+        c.execute("SELECT * FROM Pagina12 WHERE Titulo = ?", (titulos2,))
+        existing_entry = c.fetchone()
+        if existing_entry:
+            continue  
+
         sentencia_sql3 = "INSERT INTO Pagina12 (ID, Fecha, Titulo) VALUES (?, ?, ?)"
         valores3 = (unique_id, fechas3, titulos3)
         c.execute(sentencia_sql3, valores3)
@@ -57,6 +72,11 @@ def fetch_rss_data():
         titulos4 = post4.title
         fechas4 = post4.updated
 
+        c.execute("SELECT * FROM Perfil WHERE Titulo = ?", (titulos4,))
+        existing_entry = c.fetchone()
+        if existing_entry:
+            continue  
+
         sentencia_sql4 = "INSERT INTO Perfil (ID, Fecha, Titulo) VALUES (?, ?, ?)"
         valores4 = (unique_id, fechas4, titulos4)
         c.execute(sentencia_sql4, valores4)
@@ -65,6 +85,11 @@ def fetch_rss_data():
         unique_id = generate_unique_id()
         titulos5 = post5.title
         fechas5 = post5.updated
+
+        c.execute("SELECT * FROM Telam WHERE Titulo = ?", (titulos5,))
+        existing_entry = c.fetchone()
+        if existing_entry:
+            continue  
 
         sentencia_sql5 = "INSERT INTO Telam (ID, Fecha, Titulo) VALUES (?, ?, ?)"
         valores5 = (unique_id, fechas5, titulos5)
@@ -76,7 +101,7 @@ def fetch_rss_data():
 def schedule_rss_fetch():
     schedule.every().day.at("06:00").do(fetch_rss_data)
 
-fetch_rss_data()
+# fetch_rss_data()
 
 def run_scheduled_tasks():
     while True:
