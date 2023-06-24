@@ -73,11 +73,17 @@ def fetch_rss_data():
     conn.commit()
     conn.close()
 
-# Función para realizar los pedidos RSS a las 06:00
 def schedule_rss_fetch():
     schedule.every().day.at("06:00").do(fetch_rss_data)
 
-# Ejecutar la función de pedido RSS una vez al iniciar el programa
 fetch_rss_data()
+
+def run_scheduled_tasks():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)  
+
+schedule_rss_fetch()
+run_scheduled_tasks()
 
 
