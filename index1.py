@@ -6,7 +6,7 @@ import time
 
 def generate_unique_id():
     unique_id1 = str(uuid.uuid4()).replace('-', '')
-    unique_id = unique_id1[:20]
+    unique_id = unique_id1[:30]
     return unique_id
 
 def fetch_rss_data():
