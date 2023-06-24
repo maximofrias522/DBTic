@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 
 // Conectar a la base de datos
-const dbPath = 'ruta/a/tu/base/de/datos/DBTic.db'; // Reemplaza con la ruta correcta a tu base de datos
+const dbPath = 'C:\Users\Usuario\Desktop\DBTic\DBTic\DBTic.db'; // Reemplaza con la ruta correcta a tu base de datos
 const db = new sqlite3.Database(dbPath);
 
 // Consulta para obtener los datos de la tabla Ambito_Financiero
