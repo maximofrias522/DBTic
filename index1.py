@@ -15,13 +15,13 @@ def fetch_rss_data():
 
     url1 = "https://www.ambito.com/rss/pages/home.xml"
     url2 = "http://www.ole.com.ar/rss/ultimas-noticias/"
-    url3 = "https://www.pagina12.com.ar/rss/portada"
+    # url3 = "https://www.pagina12.com.ar/rss/portada"
     url4 = "https://www.perfil.com/feed"
     url5 = "https://www.telam.com.ar/rss2/ultimasnoticias.xml"
 
     feed1 = feedparser.parse(url1)
     feed2 = feedparser.parse(url2)
-    feed3 = feedparser.parse(url3)
+    # feed3 = feedparser.parse(url3)
     feed4 = feedparser.parse(url4)
     feed5 = feedparser.parse(url5)
 
@@ -53,19 +53,19 @@ def fetch_rss_data():
         valores2 = (unique_id, fechas2, titulos2)
         c.execute(sentencia_sql2, valores2)
 
-    for post3 in feed3.entries:
-        unique_id = generate_unique_id()
-        titulos3 = post3.title
-        fechas3 = post3.updated
+    # for post3 in feed3.entries:
+    #     unique_id = generate_unique_id()
+    #     titulos3 = post3.title
+    #     fechas3 = post3.updated
 
-        c.execute("SELECT * FROM Pagina12 WHERE Titulo = ?", (titulos2,))
-        existing_entry = c.fetchone()
-        if existing_entry:
-            continue  
+    #     c.execute("SELECT * FROM Pagina12 WHERE Titulo = ?", (titulos2,))
+    #     existing_entry = c.fetchone()
+    #     if existing_entry:
+    #         continue  
 
-        sentencia_sql3 = "INSERT INTO Pagina12 (ID, Fecha, Titulo) VALUES (?, ?, ?)"
-        valores3 = (unique_id, fechas3, titulos3)
-        c.execute(sentencia_sql3, valores3)
+    #     sentencia_sql3 = "INSERT INTO Pagina12 (ID, Fecha, Titulo) VALUES (?, ?, ?)"
+    #     valores3 = (unique_id, fechas3, titulos3)
+    #     c.execute(sentencia_sql3, valores3)
 
     for post4 in feed4.entries:
         unique_id = generate_unique_id()
@@ -101,7 +101,7 @@ def fetch_rss_data():
 def schedule_rss_fetch():
     schedule.every().day.at("06:00").do(fetch_rss_data)
 
-# fetch_rss_data()
+fetch_rss_data()
 
 def run_scheduled_tasks():
     while True:
