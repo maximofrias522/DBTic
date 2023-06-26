@@ -99,7 +99,7 @@ def fetch_rss_data():
     conn.close()
 
 def schedule_rss_fetch():
-    schedule.every().day.at("06:00").do(fetch_rss_data)
+    schedule.every().day.at("06:00", "12:00", "18:00", "00:00").do(fetch_rss_data)
 
 fetch_rss_data()
 
